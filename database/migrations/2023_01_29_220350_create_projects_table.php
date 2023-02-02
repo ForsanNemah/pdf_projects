@@ -17,10 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('client');
-            $table->string('person contact');
+            $table->string('person_contact');
             $table->string('year');
             $table->string('status');
             $table->string('detail');
+            $table->string('file_name');
             $table->timestamps();
         });
     }
