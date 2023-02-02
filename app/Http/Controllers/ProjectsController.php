@@ -27,6 +27,46 @@ class ProjectsController extends Controller
              
     }
 
+
+
+
+
+
+    public function projects_api()
+    {
+        //
+
+        //echo public_path();
+
+        $data =projects::get();
+
+        foreach($data as $r){
+             
+             $r->file_name=public_path()."/".$r->file_name;
+        }
+
+/*
+        foreach($data as $r){
+             
+            echo $r->file_name ;
+       }
+       */
+        return $data; 
+       
+       
+             
+    }
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Show the form for creating a new resource.
      *

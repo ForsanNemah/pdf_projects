@@ -54,7 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-
+    Route::get('/projects_api', [App\Http\Controllers\ProjectsController::class, 'p_api'])->name('home');
 
 
 });
