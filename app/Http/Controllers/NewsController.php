@@ -167,4 +167,57 @@ $name=rand(10, 30).$name;
                         ->with('success','news deleted successfully');
                         
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function news_api()
+    {
+        //
+
+        //echo public_path();
+
+        $data =neew::get();
+
+     
+
+/*
+
+   foreach($data as $r){
+             
+             $r->file_name=public_path()."/".$r->file_name;
+        }
+        foreach($data as $r){
+             
+            echo $r->file_name ;
+       }
+       */
+        return $data; 
+       
+       
+             
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

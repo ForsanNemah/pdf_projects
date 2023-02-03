@@ -18,7 +18,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/projects_api', [App\Http\Controllers\ProjectsController::class, 'projects_api'])->name('home');
+Route::get('/projects_api', [App\Http\Controllers\ProjectsController::class, 'projects_api'])->name('projects_api');
+Route::get('/news_api', [App\Http\Controllers\NewsController::class, 'news_api'])->name('news_api');
 
 
 
