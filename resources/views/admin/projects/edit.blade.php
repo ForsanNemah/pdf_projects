@@ -23,7 +23,7 @@
         </div>
     @endif
   
-    <form action="{{ route('projects.update',$project->id) }}" method="POST">
+    <form action="{{ route('projects.update',$project->id) }}" method="POST"  enctype="multipart/form-data">
         @csrf
         @method('PUT')
    
@@ -106,6 +106,16 @@
 
 
 
+    <div class="row mb-3">
+        <label for="email" class="col-md-4 col-form-label text-md-end">File name</label>
+
+        <div class="col-md-6">
+            <input id="email" type="text" class="form-control" value="{{ $project->file_name }}"   name="old_file_name" autofocus   >
+
+           
+        </div>
+    </div>
+
 
 
 
@@ -120,7 +130,7 @@
         <label for="email" class="col-md-4 col-form-label text-md-end">File</label>
 
         <div class="col-md-6">
-            <input id="email" type="file" class="form-control"    name="file_name" autofocus required   >
+            <input id="email" type="file" class="form-control"    name="file_name" autofocus     >
 
            
         </div>

@@ -166,29 +166,72 @@ $name=rand(10, 30).$name;
     
        $request->validate([
         'name' => 'required',
-        'file_name' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048',
+         
         
     ]);
   
+  
+    $data = $request->all();
 
-       $name=$request->file('file_name')->getClientOriginalName();
-       $name=rand(10, 30).$name;
-               $path = $request->file('file_name')->move('my_files',$name);
-              // echo  $path;
-              //echo  $name;
+    if ( $request->hasFile('file_name') ) {
        
-               $data = $request->all();
+        $name=$request->file('file_name')->getClientOriginalName();
+        $name=rand(10, 30).$name;
+                $path = $request->file('file_name')->move('my_files',$name);
+               // echo  $path;
+               //echo  $name;
+        
+               
+        
+                $data['file_name']=$path;
+               
+
+               $old_file_path= public_path()."/".$data['old_file_name'];
+              echo   unlink( $old_file_path );
+
+
+    }else{
+        unset($data['file_name']);
        
-               $data['file_name']=$path;
+
+    }
+      
+    unset($data['old_file_name']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
         $project->update( $data );
+
+    
       
         return redirect()->route('projects.index')
                         ->with('success','project updated successfully');
 
                         
-                        
+                  
     }
 
     /**
