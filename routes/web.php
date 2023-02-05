@@ -39,7 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-    Route::get('download/{file_name}', function( $file_name)
+    Route::get('{file_name}', function( $file_name)
     {
         $path =public_path()."/".$file_name;
         echo $path;
@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
         
         if (file_exists($path)) {
             //return Response::download($path);
-            return response()->download( $path,"project.pdf",['Content-Type: application/zip']);
+            return response()->download( $path,"project.pdf");
         }
         
         
