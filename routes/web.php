@@ -46,7 +46,8 @@ Route::group(['middleware' => ['auth']], function () {
 
         
         if (file_exists($path)) {
-            return Response::download($path);
+            //return Response::download($path);
+            return response()->download( $path);
         }
         
         
