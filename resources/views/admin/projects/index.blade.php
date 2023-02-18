@@ -31,6 +31,7 @@
             <th>Year</th>
             <th>Status </th>
             <th>Detail </th>
+            <th>Language</th>
             <th width="280px"> </th>
         </tr>
         @foreach ($projects as $person)
@@ -42,7 +43,7 @@
             <td>{{ $person->year }}</td>
             <td>{{ $person->status }}</td>
             <td>{{ $person->detail }}</td>
-             
+            <td>{{ $person->lang }}</td>
 
             
             <td>

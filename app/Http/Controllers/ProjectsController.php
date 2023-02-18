@@ -246,6 +246,13 @@ $name=rand(10, 30).$name;
  $project->delete();
        // echo "hhh";
 
+
+       if(file_exists(public_path()."/".$project['file_name'])){
+        unlink(public_path()."/".$project['file_name'] );
+   }else{
+      // dd('File is not exists.');
+   }
+
        
         return redirect()->route('projects.index')
                         ->with('success','project deleted successfully');

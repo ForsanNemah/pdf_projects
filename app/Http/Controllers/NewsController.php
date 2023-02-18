@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\admin\neew;
 use App\Http\Requests\StoreprojectsRequest;
 use App\Http\Requests\UpdateprojectsRequest;
+use Session;
 
 class NewsController extends Controller
 {
@@ -67,10 +68,33 @@ $name=rand(10, 30).$name;
        // echo  $path;
        //echo  $name;  $data['file_name']=$path;
 */
+
+
+
+
+
+
+
+
+
+
+$name=$request->file('file_name')->getClientOriginalName();
+$name=rand(10, 30).$name;
+        $path = $request->file('file_name')->move('my_files',$name);
+        echo $path;
+
+
+
+
+
+
+
+
+
         $data = $request->all();
 
       
-       
+        $data['file_name']=$path;
 
        
        neew::create($data);
@@ -105,8 +129,12 @@ $name=rand(10, 30).$name;
     public function edit(neew $news)
     {
 
-       // echo $project;
-        //
+       //echo $news;
+
+       Session::put('old_file_name', $news['file_name']);
+      // echo Session::get('old_file_path');
+
+        
         return view('admin.news.edit',compact('news'));
     }
 
@@ -128,23 +156,52 @@ $name=rand(10, 30).$name;
        
         
     ]);
-  
-/*
-       $name=$request->file('file_name')->getClientOriginalName();
-       $name=rand(10, 30).$name;
-               $path = $request->file('file_name')->move('my_files',$name);
-              // echo  $path;
-              //echo  $name;
-       
-               $data = $request->all();
-       
-               $data['file_name']=$path;
 
-*/
-        $news->update( $request->all() );
+
+
+    $data = $request->all();
+
+
+    if ( $request->hasFile('file_name') ) {
+       
+        $name=$request->file('file_name')->getClientOriginalName();
+        $name=rand(10, 30).$name;
+                $path = $request->file('file_name')->move('my_files',$name);
+               // echo  $path;
+               //echo  $name;
+        
+               
+        
+                $data['file_name']=$path;
+               
+
+              $old_file_path= public_path()."/".Session::get('old_file_name');;
+              echo   unlink( $old_file_path );
+
+
+    }else{
+        unset($data['file_name']);
+       
+
+    }
       
-        return redirect()->route('news.index')
-                        ->with('success','news updated successfully');
+
+
+
+
+
+
+    $news->update( $data );
+
+    
+      
+    return redirect()->route('news.index')
+                    ->with('success','project updated successfully');
+
+
+
+  
+ 
 
                         
                         
@@ -158,13 +215,39 @@ $name=rand(10, 30).$name;
      */
     public function destroy(neew $news)
     {
-        //
- $news->delete();
-       // echo "hhh";
+
+
+echo  $news;
+
+echo $news['file_name'];
+
+ 
 
        
+ $news->delete();
+
+
+         
+
+       
+
+
+       if(file_exists(public_path()."/".$news['file_name'])){
+         unlink(public_path()."/".$news['file_name'] );
+    }else{
+       // dd('File is not exists.');
+    }
+
+
+
+
+
+
+
+
         return redirect()->route('news.index')
                         ->with('success','news deleted successfully');
+                         
                         
     }
 

@@ -26,6 +26,8 @@
         <tr>
             <th>No</th>
             <th>content</th>
+            <th>Image</th>
+            <th>Language</th>
            
             <th width="280px"> </th>
         </tr>
@@ -33,6 +35,9 @@
         <tr>
             <td>{{ ++$i }}</td>
             <td>{{ $data_array->content }}</td>
+           
+            <td> <img src="{{url("/".$data_array->file_name)}}" class="img-fluid" alt="Responsive image" width="200" height="200">       </td>
+            <td>{{ $data_array->lang }}</td>
             
              
 
